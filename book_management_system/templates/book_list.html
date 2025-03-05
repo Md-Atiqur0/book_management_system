@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Book List{% endblock %}
+
+{% block content %}
+    <h1 class="text-center mb-4">Book List</h1>
+
+    <div class="row">
+        {% for book in books %}
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-success fs-2">{{ book.title }}</h5>
+                        <h6 class="card-subtitle text-secondary mb-2 fw-normal fs-5">{{ book.author }}</h6>
+                        <p class="card-text text-muted">{{ book.description|truncatechars:100 }}</p>
+                        <p><strong>Published Year:</strong> {{ book.published_year }}</p>
+                        <a href="{% url 'update_book' book.id %}" class="btn btn-primary btn-sm">Edit</a>
+                        <a href="{% url 'delete_book' book.id %}" class="btn btn-danger btn-sm">Delete</a>
+                    </div>
+                </div>
+            </div>
+
+            
+        {% empty %}
+            <p class="text-center">No books available.</p>
+        {% endfor %}
+    </div>
+{% endblock %}
